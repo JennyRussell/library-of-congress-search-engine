@@ -1,4 +1,6 @@
-var serchTerm = document.querySelector('#search-term');
+var userFormEl = document.querySelector('#user-form');
+var languageButtonsEl = document.querySelector('#language-buttons');
+var serchTerm = document.querySelector('#searchTerm');
 var repoContainerEl = document.querySelector('#repos-container');
 var repoSearchTerm = document.querySelector('#repo-search-term');
 
@@ -18,7 +20,7 @@ var formSubmitHandler = function (event) {
   };
 
 
-var getInfo = function (language) {
+var getInfo = function (query) {
 
     
     var apiUrl = "https://www.loc.gov/newspapers/?q="+ query +"&fo=json"
@@ -27,7 +29,7 @@ var getInfo = function (language) {
     fetch(apiUrl).then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          displayRepos(data.items, language);
+          displayRepos(data.items, query);
         });
       } else {
         alert('Error: ' + response.statusText);
@@ -35,19 +37,19 @@ var getInfo = function (language) {
     });
   };
 
+
+
   var displayRepos = function (repos, searchTerm) {
     if (repos.length === 0) {
-      repoContainerEl.textContent = 'No repositories found.';
-      // What would happen if there was no `return;` here?
-      // TODO: Write your answer here
+      repoContainerEl.textContent = 'No searches found.';
+
       return;
     }
   
     repoSearchTerm.textContent = searchTerm;
   
     for (var i = 0; i < repos.length; i++) {
-      // What is the result of this string concatenation?
-      // TODO: Write your answer here
+
       var repoName = repos[i].owner.login + '/' + repos[i].name;
       console.log(repoName)
   
