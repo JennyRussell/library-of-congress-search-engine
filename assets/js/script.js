@@ -31,7 +31,8 @@ var getInfo = function (query) {
     fetch(apiUrl).then(function (response) {
       if (response.ok) {
         response.json().then(function (data) {
-          displayRepos(data.items, query);
+          displayRepos(data, query);
+          console.log(data)
         });
       } else {
         alert('Error: ' + response.statusText);
@@ -42,33 +43,32 @@ var getInfo = function (query) {
 
 
   var displayRepos = function (Searches1, searchTerm) {
-    if (Searches1.length === 0) {
-      repoContainerEl.textContent = 'No searches found.';
 
-      return;
-    }
   
-    Searches1earchTerm.textContent = searchTerm;
+    repoSearchTerm.textContent = searchTerm;
   
-    for (var i = 0; i < Searches1.length; i++) {
+    for (var i = 0; i < 7; i++){
 
-      var searchName = Searches1[i].link + '/' + Searches1[i].title;
-      console.log(searchName)
+      var searchResults = Searches1[i];
+      console.log(searchResults)
+
+      var serchTitleEl = document.createElement("h1");
+      repoContainerEl.appendChild(serchTitleEl)
   
-      var repoEl = document.createElement('div');
-      repoEl.classList = 'list-item flex-row justify-space-between align-center';
+    //   var repoEl = document.createElement('div');
+    //   repoEl.classList = 'list-item flex-row justify-space-between align-center';
   
-      var titleEl = document.createElement('span');
-      titleEl.textContent = searchName;
+    //   var titleEl = document.createElement('span');
+    //   titleEl.textContent = searchName;
   
-      repoEl.appendChild(titleEl);
+    //   repoEl.appendChild(titleEl);
   
-      var statusEl = document.createElement('span');
-      statusEl.classList = 'flex-row align-center';
+    //   var statusEl = document.createElement('span');
+    //   statusEl.classList = 'flex-row align-center';
   
-      repoEl.appendChild(statusEl);
+    //   repoEl.appendChild(statusEl);
   
-      repoContainerEl.appendChild(repoEl);
+    //   repoContainerEl.appendChild(repoEl);
     }
   };
 
